@@ -3,7 +3,8 @@ from typing import Any, Dict
 import jwt
 from passlib.context import CryptContext
 from app.core.config import settings
-
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+http_bearer = HTTPBearer(auto_error=True)
 # Usamos Argon2id como predeterminado y dejamos bcrypt para compatibilidad
 pwd_context = CryptContext(
     schemes=["argon2", "bcrypt"],
