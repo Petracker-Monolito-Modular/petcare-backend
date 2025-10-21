@@ -12,10 +12,10 @@ async def init_db():
     if _client is None:
         _client = AsyncIOMotorClient(settings.mongo_uri)
         _db = _client[settings.mongo_db]
-
-        # Índices mínimos
         await _db["users"].create_index("email", unique=True)
-        await _db["pets"].create_index([("owner_id", 1)])
+        await _db["pets"].create_index([("owner_id", 1), ("created_at", -1)])
+
+
 
 def get_db() -> AsyncIOMotorDatabase:
     assert _db is not None, "DB not initialized. Did you call init_db()?"

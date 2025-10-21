@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from typing import List
 from app.modules.auth.router import get_current_user
 from app.modules.pets.schemas import PetCreate, PetUpdate, PetOut
@@ -6,9 +6,14 @@ from app.modules.pets import service
 
 router = APIRouter()
 
-@router.get("", response_model=List[PetOut])
-async def list_pets(user=Depends(get_current_user)):
-    return await service.list_my_pets(user["id"])
+@router.get("")
+async def list_pets(
+    user=Depends(get_current_user),
+    limit: int = Query(50, gt=0, le=100),
+    offset: int = Query(0, ge=0),
+):
+    # devuelve {"items":[...], "total":N, "limit":X, "offset":Y}
+    return await service.list_my_pets(user["id"], limit=limit, offset=offset)
 
 @router.post("", response_model=PetOut, status_code=201)
 async def create_pet(body: PetCreate, user=Depends(get_current_user)):
