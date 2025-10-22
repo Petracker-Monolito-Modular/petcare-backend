@@ -15,7 +15,7 @@
 - app/core: config, db, security
 - app/modules: auth, users, pets
 
-## Endpoints v0
+## Endpoints v1.0.0
 - POST /auth/register
 - POST /auth/login
 - GET /pets, POST /pets, PUT /pets/{id}, DELETE /pets/{id}
