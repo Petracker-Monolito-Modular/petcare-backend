@@ -1,4 +1,4 @@
-# PetCare Backend (FastAPI + Mongo)
+# Petracker Backend (FastAPI + Mongo)
 
 ## Requisitos
 - Python 3.11+
